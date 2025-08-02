@@ -10,5 +10,3 @@ Run your first test
 ```
 
 Try to write test for Authentification.php Class
-
-# php_tests
