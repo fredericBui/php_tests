@@ -66,3 +66,19 @@ Classe UserRepository.php
 | Recherche d’un utilisateur existant par email  | email: "test@example.com"           | Retourne un tableau associatif avec les données utilisateur (email + password haché) |
 | Recherche d’un utilisateur inexistant           | email: "inexistant@example.com"    | Retourne `null`                                   |
 | Mot de passe stocké est haché                    | Après création utilisateur          | Le champ `password` est une chaîne hachée (non égale au mot de passe en clair) |
+
+Classe UserRepository.php + Mailer.php
+
+➤ Écrivez un test end-to-end (fonctionnel) pour tester un scénario utilisateur complet
+
+Installer php mailer pour envoyer des mails
+```bash
+composer require phpmailer/phpmailer
+```
+Créer un compte sur mailtrap
+
+| Test / Étape                                   | Entrée / Action                             | Résultat attendu                                          |
+|------------------------------------------------|--------------------------------------------|-----------------------------------------------------------|
+| Création d’un compte utilisateur valide          | Appeler `UserRepository::createUser` avec un email et un mot de passe en clair | L’utilisateur est ajouté en base avec un mot de passe haché |
+| Envoi du mail de confirmation                     | Appeler `Mailer::sendConfirmation` avec l’email de l’utilisateur | Le mail est envoyé avec le sujet « Confirmation de votre inscription », le corps attendu et la fonction retourne `true` indiquant un envoi réussi |
+             
