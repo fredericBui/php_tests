@@ -36,17 +36,33 @@ docker run --name some-mysql \
   -d mysql
 ```
 
-## 🛠️ Initialiser les tables
+## 🛠️ Initialiser les tables
 Une fois la base lancée, exécutez votre script de migration pour créer les tables nécessaires :
 
 ```bash
 php migration.php
 ```
 
-## 🧪 Écriture des tests
-Classe Authentification.php
+## 🧪 Écriture des tests
+Classe Authentification.php (pas de base de données mot de passe en dur)
+
 ➤ Écrivez des tests unitaires pour cette classe.
 
+| Cas de test                                    | Entrée                       | Résultat attendu                       |
+|------------------------------------------------|------------------------------|--------------------------------------|
+| Connexion réussie avec identifiants valides    | username: "admin", password: "password" | Retourne `true`                       |
+| Connexion échouée avec nom d’utilisateur incorrect | username: "user", password: "password"  | Retourne `false`                      |
+| Connexion échouée avec mot de passe incorrect  | username: "admin", password: "wrong"    | Retourne `false`                      |
+| Connexion échouée avec identifiants vides      | username: "", password: ""               | Retourne `false`                      |
+
+
 Classe UserRepository.php
+
 ➤ Écrivez des tests d’intégration pour vérifier l’interaction avec la base de données.
 
+| Cas de test                                    | Entrée                              | Résultat attendu                                  |
+|------------------------------------------------|-------------------------------------|--------------------------------------------------|
+| Création d’un nouvel utilisateur                | email: "test@example.com", password: "secret" | L’utilisateur est ajouté en base avec mot de passe haché |
+| Recherche d’un utilisateur existant par email  | email: "test@example.com"           | Retourne un tableau associatif avec les données utilisateur (email + password haché) |
+| Recherche d’un utilisateur inexistant           | email: "inexistant@example.com"    | Retourne `null`                                   |
+| Mot de passe stocké est haché                    | Après création utilisateur          | Le champ `password` est une chaîne hachée (non égale au mot de passe en clair) |
