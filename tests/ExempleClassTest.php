@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
 use PHPUnit\Framework\TestCase;
-include_once '../ExempleClass.php';
+
+require_once __DIR__ . '/../ExempleClass.php';
 
 
-final class GreeterTest extends TestCase
+final class ExempleClassTest extends TestCase
 {
     public function testGreetsWithName(): void
     {
